@@ -33,5 +33,5 @@ yarn-error.log*
 # vercel
 .vercel
 
-#keys
-githubtoken
+#token
+githubtoken.js
