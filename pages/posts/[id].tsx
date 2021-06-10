@@ -1,18 +1,27 @@
 import Layout from "../../components/Layout";
 import { GetStaticProps } from "next";
+import matter from "gray-matter";
+import { APITOKEN } from "../../githubtoken";
 
 const post = ({ post }) => (
   <Layout>
-    <h1>{post.title}</h1>
-    <p>{post.body}</p>
+    <h2>{post.title}</h2>
+    <div>{post.date}</div>
+    <p>{post.content}</p>
   </Layout>
 );
 
 export const getStaticPaths = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const url =
+    "https://api.github.com/repos/woodjellyfish/BLOG/contents/articles";
+  const res = await fetch(url, {
+    headers: {
+      Authorization: "token" + APITOKEN,
+    },
+  });
   const posts = await res.json();
 
-  const paths = posts.map((post) => `/posts/${post.id}`);
+  const paths = posts.map((post) => `/posts/${post.name}`);
 
   console.log(`paths`, paths);
 
@@ -20,11 +29,27 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  console.log(`params`, params);
-  const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${params.id}`
-  );
-  const post = await res.json();
+  const url = `https://api.github.com/repos/woodjellyfish/BLOG/contents/articles/${params.id}`;
+  const res = await fetch(url, {
+    headers: {
+      Authorization: "token" + APITOKEN,
+    },
+  });
+  const data = await res.json();
+
+  const buffer = new Buffer(data.content, "base64");
+  const markdown = buffer.toString("utf-8");
+
+  const matterResult = matter(markdown);
+
+  console.log(`matterResult:data`, matterResult.data);
+
+  // console.log(`matterResult`, matterResult);
+
+  const post = {
+    content: matterResult.content,
+    ...matterResult.data,
+  };
 
   console.log(`post`, post);
 
