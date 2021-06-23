@@ -75,7 +75,6 @@ const Timer = () => {
       //preNext
       clearInterval(intervalId.current);
       const newItems = [...items];
-      console.log(`newItems:useeff`, newItems);
 
       newItems[getFindIndex(currentItem.id)].isDone = true;
       setItems(newItems);
@@ -262,8 +261,6 @@ const Timer = () => {
 
       newItems[preItemIndex].nextId = items[selectItemIndex].nextId;
     }
-
-    console.log(`newItems`, newItems);
 
     setItems(newItems);
 
