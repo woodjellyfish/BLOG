@@ -2,8 +2,6 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Layout from "../../components/Layout";
-import { APITOKEN } from "../../githubtoken";
-import fs from "fs";
 import { getSortedPostsData } from "../../lib/post";
 
 const posts = ({ allPostsData }) => {
