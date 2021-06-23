@@ -1,59 +1,31 @@
 import Layout from "../../components/Layout";
-import { GetStaticProps } from "next";
-import matter from "gray-matter";
-import { APITOKEN } from "../../githubtoken";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { getAllPostIds, getPostData } from "../../lib/post";
 
-const post = ({ post }) => (
+const post = ({ postData }) => (
   <Layout>
-    <h2>{post.title}</h2>
-    <div>{post.date}</div>
-    <p>{post.content}</p>
+    <h2>{postData.title}</h2>
+    <div>作成日:{postData.createdAt}</div>
+    <div>更新日:{postData.updatedAt}</div>
+    <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }}></div>
   </Layout>
 );
 
-export const getStaticPaths = async () => {
-  const url =
-    "https://api.github.com/repos/woodjellyfish/BLOG/contents/articles";
-  const res = await fetch(url, {
-    headers: {
-      Authorization: "token" + APITOKEN,
-    },
-  });
-  const posts = await res.json();
-
-  const paths = posts.map((post) => `/posts/${post.name}`);
-
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = getAllPostIds();
   console.log(`paths`, paths);
 
   return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const url = `https://api.github.com/repos/woodjellyfish/BLOG/contents/articles/${params.id}`;
-  const res = await fetch(url, {
-    headers: {
-      Authorization: "token" + APITOKEN,
+  const postData = await getPostData(params.id);
+  console.log(`postData`, postData);
+  return {
+    props: {
+      postData,
     },
-  });
-  const data = await res.json();
-
-  const buffer = new Buffer(data.content, "base64");
-  const markdown = buffer.toString("utf-8");
-
-  const matterResult = matter(markdown);
-
-  console.log(`matterResult:data`, matterResult.data);
-
-  // console.log(`matterResult`, matterResult);
-
-  const post = {
-    content: matterResult.content,
-    ...matterResult.data,
   };
-
-  console.log(`post`, post);
-
-  return { props: { post } };
 };
 
 export default post;

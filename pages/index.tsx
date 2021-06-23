@@ -1,22 +1,25 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
+import { getSortedPostsData } from "../lib/post";
 
-const IndexPage = () => (
+const IndexPage = ({ allPostsData }) => (
   <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello kikurage 👋</h1>
-    <p>
-      <div>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-      </div>
-      <div>
-        <Link href="/posts">
-          <a>posts</a>
-        </Link>
-      </div>
-    </p>
+    {allPostsData.map((post) => (
+      <li key={post.id}>
+        <div>{post.title}</div>
+        <div>{post.createdAt}</div>
+      </li>
+    ))}
   </Layout>
 );
+
+export const getStaticProps = async () => {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+};
 
 export default IndexPage;
