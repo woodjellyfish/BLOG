@@ -7,6 +7,7 @@ const post = ({ postData }) => (
     <h2>{postData.title}</h2>
     <div>作成日:{postData.createdAt}</div>
     <div>更新日:{postData.updatedAt}</div>
+
     <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }}></div>
   </Layout>
 );
