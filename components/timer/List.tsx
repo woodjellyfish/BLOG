@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { itemType } from ".";
+import { TextField } from "@material-ui/core";
 
 type Props = {
   isEdit: boolean;
@@ -11,7 +12,7 @@ type Props = {
 const List = ({ isEdit, items, curItemId, setItems }: Props) => {
   const [addItem, setAddItem] = useState({
     name: "",
-    sec: 0,
+    sec: 1,
   });
 
   const getFindIndex = (id: number) => {
@@ -98,31 +99,41 @@ const List = ({ isEdit, items, curItemId, setItems }: Props) => {
       <>
         {items.map((item) => (
           <div key={item.id}>
-            <input
-              onChange={(e) => ItemNameHandleChange(e, item.id)}
+            <TextField
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                ItemNameHandleChange(e, item.id)
+              }
               type="text"
               value={item.name}
             />
-            <input
-              onChange={(e) => ItemSecHandleChange(e, item.id)}
+            <TextField
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                ItemSecHandleChange(e, item.id)
+              }
               type="number"
               value={item.sec}
-              style={{ width: "3em" }}
+              style={{ width: "3em", textAlign: "right" }}
             />
             <button onClick={() => deleteItem(item.id)}>del</button>
           </div>
         ))}
-        <input
-          placeholder="newItemName"
+        <div></div>
+        <TextField
+          label="newItemName"
           type="text"
           value={addItem.name}
-          onChange={(e) => addItemNameHandleChange(e)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            addItemNameHandleChange(e)
+          }
         />
-        <input
-          value={addItem.sec}
+        <TextField
+          label="sec"
           type="number"
           style={{ width: "3em" }}
-          onChange={(e) => addItemSecHandleChange(e)}
+          InputProps={{ inputProps: { min: 1 } }}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            addItemSecHandleChange(e)
+          }
         />
         <button onClick={addSave}>add</button>
       </>
