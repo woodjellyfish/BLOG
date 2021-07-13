@@ -34,7 +34,9 @@ export default function query() {
       return <h1>loading...</h1>;
     }
     if (isError) {
-      return <h1> Error:{error.message} </h1>;
+      if (error instanceof Error) {
+        return <h1> Error:{error.message} </h1>;
+      }
     }
 
     return (
@@ -49,10 +51,10 @@ export default function query() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <button onClick={() => setIsShow(!isShow)}>hoge</button>
+        <button onClick={() => setIsShow(!isShow)}>show!</button>
 
         {isShow && <Users />}
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </>
   );
