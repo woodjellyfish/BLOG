@@ -2,6 +2,12 @@ import Layout from "../../components/Layout";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllPostIds, getPostData } from "../../lib/post";
 
+type Params = {
+  params: {
+    id: string;
+  };
+};
+
 const post = ({ postData }) => (
   <Layout>
     <h2>{postData.title}</h2>
@@ -19,9 +25,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
   const postData = await getPostData(params.id);
-  console.log(`postData`, postData);
   return {
     props: {
       postData,

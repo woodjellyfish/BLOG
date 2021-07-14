@@ -1,20 +1,43 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
-import { getSortedPostsData } from "../lib/post";
+import PostCard from "../components/post";
+import { getAllPostIds, getPostData } from "../lib/post";
 
-const IndexPage = ({ allPostsData }) => (
+type PostData = {
+  id: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  contentHtml: string;
+};
+
+type PostsData = {
+  allPostsData: PostData[];
+};
+
+const IndexPage = ({ allPostsData }: PostsData) => (
   <Layout title="Home | Next.js + TypeScript Example">
-    {allPostsData.map((post) => (
-      <li key={post.id}>
-        <div>{post.title}</div>
-        <div>{post.createdAt}</div>
-      </li>
-    ))}
+    {allPostsData
+      .slice(0)
+      .reverse()
+      .map((post) => (
+        <div key={post.id}>
+          <PostCard id={post.id} title={post.title} createdAt={post.createdAt}>
+            <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+          </PostCard>
+        </div>
+      ))}
   </Layout>
 );
 
 export const getStaticProps = async () => {
-  const allPostsData = getSortedPostsData();
+  // const allPostsData = getSortedPostsData();
+  const postIds = getAllPostIds();
+
+  const allPostsData: PostData[] = [];
+  for (let postId of postIds)
+    allPostsData.push(await getPostData(postId.params.id));
+
   return {
     props: {
       allPostsData,

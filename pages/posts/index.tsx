@@ -5,16 +5,13 @@ import Layout from "../../components/Layout";
 import { getSortedPostsData } from "../../lib/post";
 
 const posts = ({ allPostsData }) => {
-  {
-    console.log(`allPostsData`, allPostsData);
-  }
   return (
     <Layout>
       <Head>
         <title>page index</title>
       </Head>
       <ul>
-        {allPostsData.map((post) => (
+        {allPostsData.reverse().map((post) => (
           <li key={post.id}>
             <Link href={`/posts/${post.id}`}>{post.title}</Link>
           </li>

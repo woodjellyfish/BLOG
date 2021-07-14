@@ -6,19 +6,30 @@ import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "articles");
 
+type PostData = {
+  id: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  contentHtml?: string;
+};
+
 export const getSortedPostsData = () => {
   const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
+  const allPostsData: PostData[] = fileNames.map((fileName) => {
     const id = fileName.replace(/\.md$/, "");
 
     const fullpath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullpath, "utf-8");
 
     const matterResult = matter(fileContents);
+    const { title, createdAt, updatedAt } = matterResult.data;
 
     return {
       id,
-      ...matterResult.data,
+      title,
+      createdAt,
+      updatedAt,
     };
   });
 
@@ -45,11 +56,14 @@ export const getAllPostIds = () => {
   });
 };
 
-export const getPostData = async (id) => {
+export const getPostData = async (id: string) => {
   const fullpath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullpath, "utf8");
 
   const matterResult = matter(fileContents);
+  const updatedAt = String(matterResult.data.updatedAt);
+  const createdAt = String(matterResult.data.createdAt);
+  const title = String(matterResult.data.title);
 
   const processedContent = await remark()
     .use(html)
@@ -59,6 +73,8 @@ export const getPostData = async (id) => {
   return {
     id,
     contentHtml,
-    ...matterResult.data,
+    createdAt,
+    updatedAt,
+    title,
   };
 };
