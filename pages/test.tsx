@@ -1,6 +1,20 @@
-import React from "react";
-import PostCard from "../components/post";
+import React, { useState } from "react";
+import { createContext } from "react";
+import TestCompB from "../components/test/TestCompB";
 
-export default function test() {
-  return <div>hoge</div>;
+type contextType = {
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export const nameContext = createContext<contextType>(undefined);
+
+export default function Test() {
+  const [name, setName] = useState("きくらげ");
+
+  return (
+    <nameContext.Provider value={{ name: name, setName: setName }}>
+      <TestCompB />
+    </nameContext.Provider>
+  );
 }
