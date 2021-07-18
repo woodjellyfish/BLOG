@@ -5,11 +5,11 @@ import { Context } from "../../pages/context";
 export default function TestComponent() {
   const { state, dispatch } = useContext(Context);
   const increment = useCallback(
-    () => dispatch({ type: "INCREMENT", payload: 3 }),
+    () => dispatch({ type: "INCREMENT", payload: 5 }),
     []
   );
   const decrement = useCallback(
-    () => dispatch({ type: "DECREMENT", payload: 3 }),
+    () => dispatch({ type: "DECREMENT", payload: 5 }),
     []
   );
   return (
