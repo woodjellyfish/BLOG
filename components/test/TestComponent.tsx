@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
 import { useReducer } from "react";
 import { useContext } from "react";
-import { UserContext } from "../../pages/context";
+import { Context } from "../../pages/context";
 
 export default function TestComponent() {
-  const { state, dispatch } = useContext(UserContext);
+  const { state, dispatch } = useContext(Context);
   const increment = useCallback(
     () => dispatch({ type: "INCREMENT", payload: 5 }),
     []
