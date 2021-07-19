@@ -25,7 +25,6 @@ const IndexPage = ({ allPostsData }: PostsData) => (
       .map((post) => (
         <div key={post.id}>
           <PostCard id={post.id} title={post.title} createdAt={post.createdAt}>
-            {/* <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} /> */}
             <ReactMarkdown components={{ code: CodeBlock }}>
               {post.contentHtml}
             </ReactMarkdown>

@@ -9,7 +9,7 @@ type props = {
   id: string;
   createdAt: string;
   updatedAt?: string;
-  children: ReactElement;
+  children: ReactElement | ReactElement[];
 };
 
 export default function PostCard({
