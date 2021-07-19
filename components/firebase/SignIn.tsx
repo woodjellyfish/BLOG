@@ -9,9 +9,16 @@ export default function SignIn() {
   const { user, checkSignIn } = useAuthContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [error, setError] = useState("");
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    auth.signInWithEmailAndPassword(email, password);
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      router.push("/member");
+    } catch (error) {
+      console.log("error :>> ", error);
+      setError(error.message);
+    }
   };
   const handleOnChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -21,12 +28,13 @@ export default function SignIn() {
   };
 
   useEffect(() => {
-    if (checkSignIn) {
-      if (user !== undefined) router.push("/member");
-    }
+    if (checkSignIn && user !== undefined) router.push("/member");
+    console.log("user :>> ", user);
+
+    console.log("checkSignIn :>> ", checkSignIn);
   }, [checkSignIn]);
 
-  if (!checkSignIn && user !== undefined) {
+  if (checkSignIn) {
     return (
       <div>
         <h1>ログイン </h1>
@@ -53,12 +61,13 @@ export default function SignIn() {
             <button>ログイン</button>
           </div>
           <div>
-            登録は<Link href="/signUp">こちら</Link>
+            登録は<Link href="/signup">こちら</Link>
           </div>
         </form>
+        <div>{error}</div>
       </div>
     );
   } else {
-    return <></>;
+    return <>loading</>;
   }
 }

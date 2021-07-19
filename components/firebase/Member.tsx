@@ -10,14 +10,14 @@ export default function Member() {
 
   const handleLogout = () => {
     auth.signOut();
-    router.push("/signIn");
+    router.push("/signin");
   };
 
   useEffect(() => {
     console.log("isSignIn :>> ", checkSignIn);
     console.log("user :>> ", user);
     if (checkSignIn) {
-      if (user === undefined) router.push("/signIn");
+      if (user === undefined) router.push("/signin");
     }
   });
 
@@ -29,7 +29,7 @@ export default function Member() {
         <h1>会員用ページ</h1>
         <div>{user && user.email}様</div>
         <button onClick={handleLogout}>ログアウト</button>
-        <Link href="/signIn">サインイン</Link>
+        <Link href="/signin">サインイン</Link>
       </div>
     );
   }

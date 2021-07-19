@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase/firebase";
 import { useAuthContext } from "../../context/AuthContext";
+import router from "next/router";
 
 export default function SignUp() {
   const { user } = useAuthContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    auth.createUserWithEmailAndPassword(email, password);
+    try {
+      await auth.createUserWithEmailAndPassword(email, password);
+      router.push("/member");
+    } catch (error) {
+      console.log("error :>> ", error);
+    }
   };
   const handleOnChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
