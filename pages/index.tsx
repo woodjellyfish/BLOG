@@ -1,4 +1,6 @@
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import CodeBlock from "../components/codeBlock/CodeBlock";
 import Layout from "../components/Layout";
 import PostCard from "../components/post";
 import { getAllPostIds, getPostData } from "../lib/post";
@@ -23,7 +25,10 @@ const IndexPage = ({ allPostsData }: PostsData) => (
       .map((post) => (
         <div key={post.id}>
           <PostCard id={post.id} title={post.title} createdAt={post.createdAt}>
-            <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+            {/* <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} /> */}
+            <ReactMarkdown components={{ code: CodeBlock }}>
+              {post.contentHtml}
+            </ReactMarkdown>
           </PostCard>
         </div>
       ))}

@@ -1,6 +1,9 @@
 import Layout from "../../components/Layout";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllPostIds, getPostData } from "../../lib/post";
+import ReactMarkdown from "react-markdown";
+import CodeBlock from "../../components/codeBlock/CodeBlock";
+import PostCard from "../../components/post";
 
 type Params = {
   params: {
@@ -8,13 +11,28 @@ type Params = {
   };
 };
 
-const post = ({ postData }) => (
-  <Layout>
-    <h2>{postData.title}</h2>
-    <div>作成日:{postData.createdAt}</div>
-    <div>更新日:{postData.updatedAt}</div>
+type PostData = {
+  postData: {
+    id: string;
+    title: string;
+    createdAt: string;
+    updatedAt: string;
+    contentHtml: string;
+  };
+};
 
-    <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }}></div>
+const post = ({ postData }: PostData) => (
+  <Layout>
+    <PostCard
+      title={postData.title}
+      id={postData.id}
+      createdAt={postData.createdAt}
+      updatedAt={postData.updatedAt}
+    >
+      <ReactMarkdown components={{ code: CodeBlock }}>
+        {postData.contentHtml}
+      </ReactMarkdown>
+    </PostCard>
   </Layout>
 );
 

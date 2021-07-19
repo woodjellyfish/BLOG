@@ -65,10 +65,7 @@ export const getPostData = async (id: string) => {
   const createdAt = String(matterResult.data.createdAt);
   const title = String(matterResult.data.title);
 
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+  const contentHtml = matterResult.content;
 
   return {
     id,
