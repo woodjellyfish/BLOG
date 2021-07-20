@@ -7,29 +7,33 @@ type Props = {
   title?: string;
 };
 
+const classes = {
+  link: "mx-3.5 text-lg font-bold",
+};
+
 const Layout = ({ children, title = "This is the default title" }: Props) => (
-  <div>
+  <div className="bg-blue-200">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <header>
-      <nav>
+      <nav className="bg-purple-200">
         <Link href="/">
-          <a>Home</a>
+          <a className={classes.link}>Home</a>
         </Link>
         <a> | </a>
         <Link href="/about">
-          <a>About</a>
+          <a className={classes.link}>About</a>
         </Link>
         <a> | </a>
         <Link href="/posts">
-          <a>Post</a>
+          <a className={classes.link}>Post</a>
         </Link>
         <a> | </a>
         <Link href="/timer">
-          <a>timer</a>
+          <a className={classes.link}>timer</a>
         </Link>
       </nav>
     </header>

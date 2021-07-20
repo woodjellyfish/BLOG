@@ -11,7 +11,7 @@ const posts = ({ allPostsData }) => {
         <title>page index</title>
       </Head>
       <ul>
-        {allPostsData.reverse().map((post) => (
+        {allPostsData.map((post) => (
           <li key={post.id}>
             <Link href={`/posts/${post.id}`}>{post.title}</Link>
           </li>

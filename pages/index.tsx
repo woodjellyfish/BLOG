@@ -1,9 +1,9 @@
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
-import CodeBlock from "../components/codeBlock/CodeBlock";
+import { CodeBlock } from "../components/reactMarkdown/components";
 import Layout from "../components/Layout";
 import PostCard from "../components/post";
-import { getAllPostIds, getPostData } from "../lib/post";
+import { getAllPostIds, getPostFullData } from "../lib/post";
 
 type PostData = {
   id: string;
@@ -25,9 +25,7 @@ const IndexPage = ({ allPostsData }: PostsData) => (
       .map((post) => (
         <div key={post.id}>
           <PostCard id={post.id} title={post.title} createdAt={post.createdAt}>
-            <ReactMarkdown components={{ code: CodeBlock }}>
-              {post.contentHtml}
-            </ReactMarkdown>
+            {post.contentHtml}
           </PostCard>
         </div>
       ))}
@@ -35,12 +33,11 @@ const IndexPage = ({ allPostsData }: PostsData) => (
 );
 
 export const getStaticProps = async () => {
-  // const allPostsData = getSortedPostsData();
   const postIds = getAllPostIds();
 
   const allPostsData: PostData[] = [];
   for (let postId of postIds)
-    allPostsData.push(await getPostData(postId.params.id));
+    allPostsData.push(await getPostFullData(postId.params.id));
 
   return {
     props: {

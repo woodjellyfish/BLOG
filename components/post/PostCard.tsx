@@ -1,15 +1,15 @@
-import { create } from "domain";
 import Link from "next/link";
 import React from "react";
-import { ReactElement } from "react-markdown";
+import ReactMarkdown from "react-markdown";
 import styles from "./PostCard.module.css";
+import { CodeBlock, H2, P } from "../reactMarkdown/components";
 
 type props = {
   title: string;
   id: string;
   createdAt: string;
   updatedAt?: string;
-  children: ReactElement | ReactElement[];
+  children: string;
 };
 
 export default function PostCard({
@@ -21,14 +21,22 @@ export default function PostCard({
 }: props) {
   return (
     <>
-      <div className={styles.root}>
-        <div className={styles.title}>
-          <Link href={`/posts/${id}`}>{title}</Link>
-          <a className={styles.createdAt}>作成日{createdAt}</a>
+      <div className="p-3 max-w-3xl mx-auto bg-blue-300 rounded-sm shadow-md ">
+        <div className="px-2 bg-blue-400 rounded-md shadow-lg">
+          <Link href={`/posts/${id}`}>
+            <a className="px-0 mb-4 text-black text-2xl">{title}</a>
+          </Link>
+          <a className="px-7 text-right text-sm text-black font-normal">
+            {createdAt}
+          </a>
           {updatedAt && <a className={styles.createdAt}>更新日{updatedAt}</a>}
         </div>
 
-        <div className={styles.content}>{children}</div>
+        <div className="text-base">
+          <ReactMarkdown components={{ code: CodeBlock, h2: H2, p: P }}>
+            {children}
+          </ReactMarkdown>
+        </div>
       </div>
     </>
   );

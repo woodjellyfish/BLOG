@@ -2,19 +2,22 @@ import React, { useState } from "react";
 import { createContext } from "react";
 import TestCompB from "../components/test/TestCompB";
 
-type contextType = {
-  name: string;
-  setName: React.Dispatch<React.SetStateAction<string>>;
-};
-
-export const nameContext = createContext<contextType>(undefined);
-
 export default function Test() {
   const [name, setName] = useState("きくらげ");
+  const [style, setStyle] = useState("bg-white");
 
+  const handleClick = (color: string) => {
+    setStyle(`bg-${color}-300`);
+  };
   return (
-    <nameContext.Provider value={{ name: name, setName: setName }}>
-      <TestCompB />
-    </nameContext.Provider>
+    <>
+      <div className={style}>{name}</div>
+      <button className="bg-red-300 w-80" onClick={() => handleClick("red")}>
+        red
+      </button>
+      <button className="bg-blue-300 w-80" onClick={() => handleClick("blue")}>
+        blue
+      </button>
+    </>
   );
 }

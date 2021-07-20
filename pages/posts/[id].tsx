@@ -1,9 +1,8 @@
 import Layout from "../../components/Layout";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { getAllPostIds, getPostData } from "../../lib/post";
-import ReactMarkdown from "react-markdown";
-import CodeBlock from "../../components/codeBlock/CodeBlock";
+import { getAllPostIds, getPostFullData } from "../../lib/post";
 import PostCard from "../../components/post";
+import { PostData } from "../../interfaces";
 
 type Params = {
   params: {
@@ -11,17 +10,11 @@ type Params = {
   };
 };
 
-type PostData = {
-  postData: {
-    id: string;
-    title: string;
-    createdAt: string;
-    updatedAt: string;
-    contentHtml: string;
-  };
+type Props = {
+  postData: PostData;
 };
 
-const post = ({ postData }: PostData) => (
+const post = ({ postData }: Props) => (
   <Layout>
     <PostCard
       title={postData.title}
@@ -29,22 +22,19 @@ const post = ({ postData }: PostData) => (
       createdAt={postData.createdAt}
       updatedAt={postData.updatedAt}
     >
-      <ReactMarkdown components={{ code: CodeBlock }}>
-        {postData.contentHtml}
-      </ReactMarkdown>
+      {postData.contentHtml}
     </PostCard>
   </Layout>
 );
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds();
-  console.log(`paths`, paths);
 
   return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
-  const postData = await getPostData(params.id);
+  const postData = await getPostFullData(params.id);
   return {
     props: {
       postData,

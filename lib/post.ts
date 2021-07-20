@@ -3,16 +3,9 @@ import path from "path";
 import matter from "gray-matter";
 import remark from "remark";
 import html from "remark-html";
+import { PostData } from "../interfaces";
 
 const postsDirectory = path.join(process.cwd(), "articles");
-
-type PostData = {
-  id: string;
-  title: string;
-  createdAt: string;
-  updatedAt: string;
-  contentHtml?: string;
-};
 
 export const getSortedPostsData = () => {
   const fileNames = fs.readdirSync(postsDirectory);
@@ -56,7 +49,7 @@ export const getAllPostIds = () => {
   });
 };
 
-export const getPostData = async (id: string) => {
+export const getPostFullData = async (id: string) => {
   const fullpath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullpath, "utf8");
 
