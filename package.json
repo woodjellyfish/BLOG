@@ -20,7 +20,8 @@
     "react-query": "^3.18.1",
     "remark": "^13.0.0",
     "remark-html": "^13.0.1",
-    "sass": "^1.35.2"
+    "sass": "^1.35.2",
+    "stylelint-config-recommended": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",
