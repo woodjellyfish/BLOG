@@ -8,7 +8,7 @@ type Props = {
 };
 
 const classes = {
-  link: "mx-3.5 text-lg font-bold",
+  link: "mx-3.5 text-lg font-bold hover:bg-purple-300",
 };
 
 const Layout = ({ children, title = "This is the default title" }: Props) => (
@@ -18,7 +18,7 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <header>
+    <header className="sticky top-0 shadow-lg">
       <nav className="bg-purple-200">
         <Link href="/">
           <a className={classes.link}>Home</a>

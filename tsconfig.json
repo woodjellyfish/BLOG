@@ -14,6 +14,12 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "context/AuthContext.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "context/AuthContext.js",
+    "components/reactMarkdown/index.js"
+  ],
   "exclude": ["node_modules"]
 }

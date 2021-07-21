@@ -5,7 +5,6 @@ import {
   HeadingComponent,
   NormalComponent,
 } from "react-markdown/src/ast-to-react";
-import styles from "./components.module.css";
 
 const CodeBlock: CodeComponent = ({ inline, className, children }) => {
   if (inline) {
@@ -14,20 +13,27 @@ const CodeBlock: CodeComponent = ({ inline, className, children }) => {
   const match = /language-(\w+)/.exec(className || "");
   const lang = match && match[1] ? match[1] : "";
   return (
-    <SyntaxHighlighter
-      style={dark}
-      language={lang}
-      children={String(children).replace(/\n$/, "")}
-    />
+    <div className="m-4">
+      <SyntaxHighlighter
+        style={dark}
+        language={lang}
+        children={String(children).replace(/\n$/, "")}
+      />
+    </div>
   );
 };
 
-const H2: HeadingComponent = ({ level, node, ...props }) => {
-  return <h2 className={styles.h2}>{props.children}</h2>;
+const H2: HeadingComponent = ({ level, node, className, ...props }) => {
+  // return <h2 className={styles.h2}>{props.children}</h2>;
+  return (
+    <h2 className="text-2xl font-bold px-2 m-4 border-b-2 border-l-8 border-red-300 ">
+      {props.children}
+    </h2>
+  );
 };
 
 const P: NormalComponent = ({ ...props }) => {
-  return <p className={styles.p}>{props.children}</p>;
+  return <p className="ml-5 max-w-xl">{props.children}</p>;
 };
 
 export { CodeBlock, H2, P };

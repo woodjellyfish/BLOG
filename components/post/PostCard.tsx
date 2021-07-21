@@ -1,8 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import styles from "./PostCard.module.css";
-import { CodeBlock, H2, P } from "../reactMarkdown/components";
+import { CodeBlock, H2, P } from "../reactMarkdown/Components";
 
 type props = {
   title: string;
@@ -21,15 +20,20 @@ export default function PostCard({
 }: props) {
   return (
     <>
-      <div className="p-3 max-w-3xl mx-auto bg-blue-300 rounded-sm shadow-md ">
+      <div className="m-5 p-3 max-w-3xl mx-auto bg-blue-300 rounded-sm shadow-md ">
         <div className="px-2 bg-blue-400 rounded-md shadow-lg">
           <Link href={`/posts/${id}`}>
-            <a className="px-0 mb-4 text-black text-2xl">{title}</a>
+            <a
+              id={id}
+              className="px-0 mb-4 text-black text-2xl hover:bg-yellow-200"
+            >
+              {title}
+            </a>
           </Link>
           <a className="px-7 text-right text-sm text-black font-normal">
             {createdAt}
           </a>
-          {updatedAt && <a className={styles.createdAt}>更新日{updatedAt}</a>}
+          {updatedAt && <a className="px-7">更新日{updatedAt}</a>}
         </div>
 
         <div className="text-base">

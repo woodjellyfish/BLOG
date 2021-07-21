@@ -2,21 +2,21 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Layout from "../../components/Layout";
+import Sidebar from "../../components/side/RecentPosts";
+import { PostData } from "../../interfaces";
 import { getSortedPostsData } from "../../lib/post";
 
-const posts = ({ allPostsData }) => {
+type AllPostsData = {
+  allPostsData: PostData[];
+};
+
+const posts = ({ allPostsData }: AllPostsData) => {
   return (
     <Layout>
       <Head>
         <title>page index</title>
       </Head>
-      <ul>
-        {allPostsData.map((post) => (
-          <li key={post.id}>
-            <Link href={`/posts/${post.id}`}>{post.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <Sidebar postsData={allPostsData} />
     </Layout>
   );
 };

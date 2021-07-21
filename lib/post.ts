@@ -7,7 +7,7 @@ import { PostData } from "../interfaces";
 
 const postsDirectory = path.join(process.cwd(), "articles");
 
-export const getSortedPostsData = () => {
+export const getSortedPostsData = (): PostData[] => {
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData: PostData[] = fileNames.map((fileName) => {
     const id = fileName.replace(/\.md$/, "");
