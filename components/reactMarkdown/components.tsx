@@ -6,7 +6,7 @@ import {
   NormalComponent,
 } from "react-markdown/src/ast-to-react";
 
-const CodeBlock: CodeComponent = ({ inline, className, children }) => {
+export const CodeBlock: CodeComponent = ({ inline, className, children }) => {
   if (inline) {
     return <code className={className}>{children}</code>;
   }
@@ -23,7 +23,7 @@ const CodeBlock: CodeComponent = ({ inline, className, children }) => {
   );
 };
 
-const H2: HeadingComponent = ({ level, node, className, ...props }) => {
+export const H2: HeadingComponent = ({ level, node, className, ...props }) => {
   return (
     <h2
       id={props.children[0].toString()}
@@ -34,8 +34,8 @@ const H2: HeadingComponent = ({ level, node, className, ...props }) => {
   );
 };
 
-const P: NormalComponent = ({ ...props }) => {
+export const P: NormalComponent = ({ ...props }) => {
   return <p className="ml-5 max-w-xl">{props.children}</p>;
 };
 
-export { CodeBlock, H2, P };
+// export { CodeBlock, H2, P };
