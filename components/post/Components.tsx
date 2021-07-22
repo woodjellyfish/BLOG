@@ -34,6 +34,10 @@ export const H2: HeadingComponent = ({ level, node, className, ...props }) => {
   );
 };
 
+export const H3: HeadingComponent = ({ level, node, className, ...props }) => {
+  return <h3 className="text-xl font-bold px-2 m-4">{props.children}</h3>;
+};
+
 export const P: NormalComponent = ({ ...props }) => {
-  return <p className="ml-5 max-w-xl">{props.children}</p>;
+  return <p className="ml-5 max-w-2xl">{props.children}</p>;
 };

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { CodeBlock, H2, P } from "./Components";
+import { CodeBlock, H2, H3, P } from "./Components";
 
 type props = {
   title: string;
@@ -37,7 +37,7 @@ export default function PostCard({
         </div>
 
         <div className="text-base">
-          <ReactMarkdown components={{ code: CodeBlock, h2: H2, p: P }}>
+          <ReactMarkdown components={{ code: CodeBlock, h2: H2, h3: H3, p: P }}>
             {children}
           </ReactMarkdown>
         </div>
