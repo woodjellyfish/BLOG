@@ -1,6 +1,3 @@
-import Link from "next/link";
-import ReactMarkdown from "react-markdown";
-import { CodeBlock } from "../components/reactMarkdown/Components";
 import Layout from "../components/Layout";
 import PostCard from "../components/post";
 import { getAllPostIds, getPostFullData } from "../lib/post";
