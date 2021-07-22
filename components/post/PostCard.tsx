@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { CodeBlock, H2, P } from "../reactMarkdown/Components";
+import { CodeBlock, H2, P } from "./Components";
 
 type props = {
   title: string;
