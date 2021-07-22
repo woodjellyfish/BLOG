@@ -1,4 +1,3 @@
 /// <reference types="next" />
 /// <reference types="next/types/global" />
-
-declare module "*.tsx";
+/// <reference types="next/image-types/global" />
