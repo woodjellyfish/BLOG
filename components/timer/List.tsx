@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from "react";
 import { itemType } from ".";
-import { TextField } from "@material-ui/core";
 
 type Props = {
   isEdit: boolean;
@@ -99,14 +98,14 @@ const List = ({ isEdit, items, curItemId, setItems }: Props) => {
       <>
         {items.map((item) => (
           <div key={item.id}>
-            <TextField
+            <input
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 ItemNameHandleChange(e, item.id)
               }
               type="text"
               value={item.name}
             />
-            <TextField
+            <input
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 ItemSecHandleChange(e, item.id)
               }
@@ -118,19 +117,18 @@ const List = ({ isEdit, items, curItemId, setItems }: Props) => {
           </div>
         ))}
         <div></div>
-        <TextField
-          label="newItemName"
+        <input
+          placeholder="newItemName"
           type="text"
           value={addItem.name}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             addItemNameHandleChange(e)
           }
         />
-        <TextField
-          label="sec"
+        <input
+          placeholder="sec"
           type="number"
           style={{ width: "3em" }}
-          InputProps={{ inputProps: { min: 1 } }}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             addItemSecHandleChange(e)
           }

@@ -32,9 +32,8 @@ const post = ({ postData }: Props) => (
           id={postData.id}
           createdAt={postData.createdAt}
           updatedAt={postData.updatedAt}
-        >
-          {postData.contentHtml}
-        </PostCard>
+          contentHtml={postData.contentHtml}
+        />
       </div>
       <div className="md:block flex-auto max-w-sm bg-blue-300 ml-4 mt-4 rounded-md shadow-md sticky top-11 h-full ">
         <ElementIdLinks ids={extractionIds(postData.contentHtml)} />

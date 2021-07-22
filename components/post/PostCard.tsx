@@ -1,23 +1,17 @@
+import { create } from "domain";
 import Link from "next/link";
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import { PostData } from "../../interfaces";
 import { CodeBlock, H2, H3, P } from "./Components";
-
-type props = {
-  title: string;
-  id: string;
-  createdAt: string;
-  updatedAt?: string;
-  children: string;
-};
 
 export default function PostCard({
   title,
-  children,
+  contentHtml,
   createdAt,
   updatedAt,
   id,
-}: props) {
+}: PostData) {
   return (
     <>
       <div className="m-5 p-3 max-w-3xl mx-auto bg-blue-300 rounded-sm shadow-md ">
@@ -25,20 +19,22 @@ export default function PostCard({
           <Link href={`/posts/${id}`}>
             <a
               id={id}
-              className="px-0 mb-4 text-black text-2xl hover:bg-yellow-200"
+              className="px-0 mb-4 font-bold text-3xl hover:bg-yellow-200"
             >
               {title}
             </a>
           </Link>
-          <a className="px-7 text-right text-sm text-black font-normal">
-            {createdAt}
+        </div>
+
+        <div>
+          <a className="ml-3">
+            作成日:{createdAt} | 更新日:{updatedAt}
           </a>
-          {updatedAt && <a className="px-7">更新日{updatedAt}</a>}
         </div>
 
         <div className="text-base">
           <ReactMarkdown components={{ code: CodeBlock, h2: H2, h3: H3, p: P }}>
-            {children}
+            {contentHtml}
           </ReactMarkdown>
         </div>
       </div>
