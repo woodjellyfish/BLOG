@@ -25,7 +25,6 @@ export default function RecentPosts({ postsData }: Props) {
           .map((postData) => (
             <li key={postData.id} className="text-lg hover:bg-yellow-300">
               <Link href={`/posts/${postData.id}`}>{postData.title}</Link>
-              {/* <a onClick={() => scrollId(postData.id)}>{postData.title}</a> */}
             </li>
           ))}
       </ul>
