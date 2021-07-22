@@ -13,7 +13,8 @@ export const CodeBlock: CodeComponent = ({ inline, className, children }) => {
   const match = /language-(\w+)/.exec(className || "");
   const lang = match && match[1] ? match[1] : "";
   return (
-    <div className="m-4">
+    // <div className="m-4">
+    <div>
       <SyntaxHighlighter
         style={dark}
         language={lang}
@@ -27,7 +28,7 @@ export const H2: HeadingComponent = ({ level, node, className, ...props }) => {
   return (
     <h2
       id={props.children[0].toString()}
-      className="text-2xl font-bold px-2 m-4 border-b-4 border-l-8 border-red-300 "
+      // className="text-2xl font-bold px-2 m-4 border-b-4 border-l-8 border-red-300 "
     >
       {props.children}
     </h2>
@@ -35,7 +36,13 @@ export const H2: HeadingComponent = ({ level, node, className, ...props }) => {
 };
 
 export const P: NormalComponent = ({ ...props }) => {
-  return <p className="ml-5 max-w-xl">{props.children}</p>;
+  return (
+    <p
+    // className="ml-5 max-w-xl"
+    >
+      {props.children}
+    </p>
+  );
 };
 
 // export { CodeBlock, H2, P };
