@@ -26,7 +26,10 @@ const CodeBlock: CodeComponent = ({ inline, className, children }) => {
 const H2: HeadingComponent = ({ level, node, className, ...props }) => {
   // return <h2 className={styles.h2}>{props.children}</h2>;
   return (
-    <h2 className="text-2xl font-bold px-2 m-4 border-b-2 border-l-8 border-red-300 ">
+    <h2
+      id={props.children[0].toString()}
+      className="text-2xl font-bold px-2 m-4 border-b-4 border-l-8 border-red-300 "
+    >
       {props.children}
     </h2>
   );

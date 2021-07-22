@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllPostIds, getPostFullData } from "../../lib/post";
 import PostCard from "../../components/post";
 import { PostData } from "../../interfaces";
+import ElementIdLinks from "../../components/side/ElementIdLinks";
 
 type Params = {
   params: {
@@ -14,16 +15,31 @@ type Props = {
   postData: PostData;
 };
 
+const extractionIds = (md: string) => {
+  const h2Tags = md.match(/^#{2} .+/gm);
+  if (h2Tags === null) return [];
+  const ids = h2Tags.map((tag) => tag.replace("## ", ""));
+
+  return ids;
+};
+
 const post = ({ postData }: Props) => (
   <Layout>
-    <PostCard
-      title={postData.title}
-      id={postData.id}
-      createdAt={postData.createdAt}
-      updatedAt={postData.updatedAt}
-    >
-      {postData.contentHtml}
-    </PostCard>
+    <div className=" md:flex justify-center">
+      <div className="flex-initial flex-col ">
+        <PostCard
+          title={postData.title}
+          id={postData.id}
+          createdAt={postData.createdAt}
+          updatedAt={postData.updatedAt}
+        >
+          {postData.contentHtml}
+        </PostCard>
+      </div>
+      <div className="md:block flex-auto max-w-sm bg-blue-300 ml-4 mt-4 rounded-md shadow-md sticky top-11 h-full ">
+        <ElementIdLinks ids={extractionIds(postData.contentHtml)} />
+      </div>
+    </div>
   </Layout>
 );
 
