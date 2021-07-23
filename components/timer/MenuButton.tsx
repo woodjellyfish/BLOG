@@ -37,17 +37,21 @@ const MenuButton = ({
   if (isEdit) {
     return (
       <>
-        <Button name="save" clickEv={itemsSave} />
-        <Button name="default" clickEv={() => setItems(getItemDefault())} />
-        <Button name="edit" clickEv={editHandleClick} />
+        <div className="flex-row items-center ">
+          <Button name="save" onClick={itemsSave} />
+          <Button name="default" onClick={() => setItems(getItemDefault())} />
+          <Button name="edit" onClick={editHandleClick} />
+        </div>
       </>
     );
   } else {
     return (
       <>
-        <Button name={isStarted ? "stop" : "start"} clickEv={switchTimer} />
-        <Button name="reset" clickEv={reset} />
-        <Button name="edit" clickEv={editHandleClick} />
+        <div className="flex-row ">
+          <Button name={isStarted ? "stop" : "start"} onClick={switchTimer} />
+          <Button name="reset" onClick={reset} />
+          <Button name="edit" onClick={editHandleClick} />
+        </div>
       </>
     );
   }

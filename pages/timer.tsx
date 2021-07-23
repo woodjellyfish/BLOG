@@ -167,25 +167,29 @@ const Timer = () => {
 
   return (
     <Layout>
-      <h1>Timer</h1>
-      今の項目
-      <Menu item={currentItem} isEdit={isEdit} />
-      <MenuButton
-        isStarted={isStarted}
-        isEdit={isEdit}
-        items={items}
-        editHandleClick={editHandleClick}
-        reset={reset}
-        setItems={setItems}
-        switchTimer={switchTimer}
-        getItemDefault={getItemDefault}
-      />
-      <List
-        isEdit={isEdit}
-        items={items}
-        curItemId={currentItem.id}
-        setItems={setItems}
-      />
+      <div className="bg-blue-100 w-full flex flex-col">
+        <Menu item={currentItem} isEdit={isEdit} />
+        <div className="mt-5 flex justify-center">
+          <MenuButton
+            isStarted={isStarted}
+            isEdit={isEdit}
+            items={items}
+            editHandleClick={editHandleClick}
+            reset={reset}
+            setItems={setItems}
+            switchTimer={switchTimer}
+            getItemDefault={getItemDefault}
+          />
+        </div>
+        <div className="mt-1 flex justify-center">
+          <List
+            isEdit={isEdit}
+            items={items}
+            curItemId={currentItem.id}
+            setItems={setItems}
+          />
+        </div>
+      </div>
     </Layout>
   );
 };
