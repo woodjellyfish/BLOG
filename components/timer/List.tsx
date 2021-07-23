@@ -99,6 +99,7 @@ const List = ({ isEdit, items, curItemId, setItems }: Props) => {
             <div className="mb-1" key={item.id}>
               <input
                 className="text-xl border-b mb-1 border-gray-500 mr-3"
+                size={15}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   ItemNameHandleChange(e, item.id)
                 }
@@ -128,6 +129,7 @@ const List = ({ isEdit, items, curItemId, setItems }: Props) => {
               className="text-xl border-b mb-1 border-gray-500 mr-3"
               placeholder="newItemName"
               type="text"
+              size={15}
               value={addItem.name}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 addItemNameHandleChange(e)
