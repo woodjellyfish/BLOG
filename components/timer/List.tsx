@@ -157,7 +157,7 @@ const List = ({ isEdit, items, curItemId, setItems }: Props) => {
   } else {
     return (
       <>
-        <div className="flex flex-col bg-white rounded-t-md p-3 mb-5">
+        <div className="flex flex-col bg-white rounded-md p-3 mb-5">
           {items.map((item) => (
             <div className="flex" key={item.id}>
               <a className="font-bold text-xl">
