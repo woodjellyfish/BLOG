@@ -4,9 +4,7 @@ import { getAllPostIds, getPostFullData } from "../../lib/post";
 import PostCard from "../../components/post";
 import { CommentData, PostData } from "../../interfaces";
 import ElementIdLinks from "../../components/side/ElementIdLinks";
-import CommentList from "../../components/post/CommentList";
-import { fetchCommentData } from "../../lib/comment";
-import CreateCommentForm from "../../components/post/CreateCommentForm";
+import CommentBase from "../../components/comment/CommentBase";
 
 type Params = {
   params: {
@@ -27,7 +25,7 @@ const extractionIds = (md: string) => {
   return ids;
 };
 
-const post = ({ postData, commentData }: Props) => (
+const post = ({ postData }: Props) => (
   <Layout>
     <div className=" md:flex justify-center">
       <div className="flex flex-col">
@@ -40,13 +38,7 @@ const post = ({ postData, commentData }: Props) => (
             contentHtml={postData.contentHtml}
           />
         </div>
-        <div>
-          <CreateCommentForm postId={postData.id} />
-        </div>
-        <div className="mt-4">
-          {/* comment component */}
-          <CommentList commentData={commentData} />
-        </div>
+        <CommentBase postId={postData.id} />
       </div>
       <div className="md:block flex-auto max-w-sm bg-blue-300 ml-4 mt-4 rounded-md shadow-md sticky top-11 h-full ">
         <ElementIdLinks ids={extractionIds(postData.contentHtml)} />
@@ -64,11 +56,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
   const postData = await getPostFullData(params.id);
   //firebase firestoreからコメントデータを取得
-  const commentData = await fetchCommentData(params.id);
+  // const commentData = await fetchCommentData(params.id);
   return {
     props: {
       postData,
-      commentData,
+      // commentData,
     },
   };
 };

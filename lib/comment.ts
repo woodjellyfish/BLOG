@@ -4,7 +4,7 @@ import { dbAdmin } from "../firebase/nodeApp";
 
 export const fetchCommentData = async (id: string) => {
   const commentData = [];
-  await dbAdmin
+  await db
     .collection("comments")
     .where("postId", "==", id)
     .get()
@@ -16,6 +16,14 @@ export const fetchCommentData = async (id: string) => {
     .catch((error) => {
       console.log(error);
     });
+
+  commentData.sort((a, b) => {
+    if (a.createdAt < b.createdAt) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 
   return commentData;
 };

@@ -1,39 +1,16 @@
 import React, { useState } from "react";
-import { db } from "../../firebase/clientApp";
-import { formatToTimeZone } from "date-fns-timezone";
-import { CommentData } from "../../interfaces";
 
 type Props = {
   postId: string;
-};
-export default function CreateCommentForm({ postId }: Props) {
-  const [userName, setUserName] = useState("");
-  const [commentMessage, setCommentMessage] = useState("");
-
-  const createCommentData = (
+  postCommentData: (
     userName: string,
     commentMessage: string,
     postId: string
-  ) => {
-    const dbRef = db.collection("comments");
-    const id = dbRef.doc().id;
-    const date = new Date();
-    const jpDate = formatToTimeZone(date, "YYYY-MM-DD HH:mm:ss", {
-      timeZone: "Asia/Tokyo",
-    });
-
-    const sendCommentData: CommentData = {
-      id: id,
-      postId: postId,
-      message: commentMessage,
-      createdAt: jpDate,
-      userName: userName,
-    };
-
-    dbRef.add(sendCommentData);
-
-    console.log(`sendCommentData`, sendCommentData);
-  };
+  ) => void;
+};
+export default function CreateCommentForm({ postId, postCommentData }: Props) {
+  const [userName, setUserName] = useState("");
+  const [commentMessage, setCommentMessage] = useState("");
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
@@ -45,7 +22,9 @@ export default function CreateCommentForm({ postId }: Props) {
   };
 
   const handleSubmitCommentData = () => {
-    createCommentData(userName, commentMessage, postId);
+    postCommentData(userName, commentMessage, postId);
+    setUserName("");
+    setCommentMessage("");
   };
   return (
     <div className="w-full">
@@ -59,6 +38,7 @@ export default function CreateCommentForm({ postId }: Props) {
             id="userName"
             type="text"
             placeholder="ユーザー名"
+            value={userName}
             onChange={(e) => handleChangeName(e)}
           />
         </div>
@@ -72,6 +52,7 @@ export default function CreateCommentForm({ postId }: Props) {
             className="bg-gray-100 p-1 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="commentMessage"
             onChange={(e) => handleChangeCommentMessage(e)}
+            value={commentMessage}
           />
         </div>
 
