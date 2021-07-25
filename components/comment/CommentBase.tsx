@@ -51,14 +51,10 @@ export default function CommentBase({ postId }: Props) {
     })();
   }, []);
 
-  useEffect(() => {
-    console.log("commentData :>> ", commentData);
-  });
-
   return (
     <>
       <CreateCommentForm postId={postId} postCommentData={postCommentData} />
-      <CommentList commentData={commentData} />
+      {commentData != undefined && <CommentList commentData={commentData} />}
     </>
   );
 }
