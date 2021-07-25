@@ -11,17 +11,14 @@ export default function RecentPosts({ postsData }: Props) {
         最近の投稿
       </a>
       <ul>
-        {postsData
-          .slice(0)
-          .reverse()
-          .map((postData) => (
-            <div key={postData.id}>
-              <li className="text-lg ml-3 hover:bg-yellow-300">
-                <Link href={`/posts/${postData.id}`}>{postData.title}</Link>
-              </li>
-              <div className="ml-5">{postData.createdAt}</div>
-            </div>
-          ))}
+        {postsData.map((postData) => (
+          <div key={postData.id}>
+            <li className="text-lg ml-3 hover:bg-yellow-300">
+              <Link href={`/posts/${postData.id}`}>{postData.title}</Link>
+            </li>
+            <div className="ml-5">{postData.createdAt}</div>
+          </div>
+        ))}
       </ul>
     </div>
   );

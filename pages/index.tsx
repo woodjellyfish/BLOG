@@ -18,19 +18,16 @@ const IndexPage = ({ allPostsData }: PostsData) => {
     <Layout title="Home | Next.js + TypeScript Example">
       <div className=" md:flex justify-center">
         <div className="flex-initial flex-col ">
-          {allPostsData
-            .slice(0)
-            .reverse()
-            .map((post) => (
-              <PostCard
-                key={post.id}
-                id={post.id}
-                title={post.title}
-                createdAt={post.createdAt}
-                updatedAt={post.updatedAt}
-                contentHtml={post.contentHtml}
-              />
-            ))}
+          {allPostsData.map((post) => (
+            <PostCard
+              key={post.id}
+              id={post.id}
+              title={post.title}
+              createdAt={post.createdAt}
+              updatedAt={post.updatedAt}
+              contentHtml={post.contentHtml}
+            />
+          ))}
         </div>
 
         <div className={sideStyle}>
@@ -46,6 +43,16 @@ export const getStaticProps = async () => {
   const allPostsData: PostData[] = [];
   for (let postId of postIds)
     allPostsData.push(await getPostFullData(postId.params.id));
+
+  allPostsData.sort((a, b) => {
+    if (a.createdAt < b.createdAt) {
+      return 1;
+    } else if (a.createdAt > b.createdAt) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
 
   return {
     props: {

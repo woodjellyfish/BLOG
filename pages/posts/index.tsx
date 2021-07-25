@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Layout from "../../components/Layout";
-import Sidebar from "../../components/side/RecentPosts";
+import RecentPosts from "../../components/side/RecentPosts";
 import { PostData } from "../../interfaces";
 import { getSortedPostsData } from "../../lib/post";
 
@@ -15,7 +15,7 @@ const posts = ({ allPostsData }: AllPostsData) => {
       <Head>
         <title>page index</title>
       </Head>
-      <Sidebar postsData={allPostsData} />
+      <RecentPosts postsData={allPostsData} />
     </Layout>
   );
 };
