@@ -11,3 +11,11 @@ export type PostData = {
   updatedAt: string;
   contentHtml?: string;
 };
+
+export type CommentData = {
+  id: string;
+  postId: string;
+  message: string;
+  createdAt: string;
+  userName: string;
+};

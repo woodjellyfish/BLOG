@@ -3,7 +3,7 @@ import router from "next/router";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useAuthContext } from "../../context/AuthContext";
-import { auth } from "../../firebase/firebase";
+import { auth } from "../../firebase/clientApp";
 
 export default function SignIn() {
   const { user, checkSignIn } = useAuthContext();

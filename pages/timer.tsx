@@ -140,7 +140,6 @@ const Timer = () => {
   }, []);
 
   useEffect(() => {
-    console.log(`currentItem`, currentItem);
     if (currentItem.sec < 0) {
       //preNext
       clearInterval(intervalId.current);

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
-import { auth } from "../firebase/firebase";
+import { auth } from "../firebase/clientApp";
 import firebase from "firebase/app";
 
 type AuthContextValue = {
