@@ -22,6 +22,12 @@ export default function CreateCommentForm({ postId, postCommentData }: Props) {
   };
 
   const handleSubmitCommentData = () => {
+    if (userName == "") {
+      return false;
+    }
+    if (commentMessage == "") {
+      return false;
+    }
     postCommentData(userName, commentMessage, postId);
     setUserName("");
     setCommentMessage("");
