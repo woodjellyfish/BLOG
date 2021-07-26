@@ -1,34 +1,9 @@
 import { useState } from "react";
 
 export default function Test() {
-  const [users, setUsers] = useState([
-    {
-      name: "hoge",
-      age: 12,
-    },
-    ,
-    {
-      name: "piyo",
-      age: 23,
-    },
-  ]);
-
-  const addUser = () => {
-    const newUser = {
-      name: "jellyfish",
-      age: 34,
-    };
-  };
   return (
     <div>
-      {users.map((user, i) => (
-        <div key={i}>
-          {user.name} : {user.age}
-        </div>
-      ))}
-      <button className="bg-blue-300" onClick={addUser}>
-        click me
-      </button>
+      <input className="shadow border rounded py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-200" />
     </div>
   );
 }

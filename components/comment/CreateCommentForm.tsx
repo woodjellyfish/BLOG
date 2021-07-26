@@ -77,7 +77,7 @@ export default function CreateCommentForm({ postId, setCommentData }: Props) {
             ユーザー名
           </label>
           <input
-            className="bg-gray-100 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="bg-gray-100 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-600"
             id="userName"
             type="text"
             placeholder="ユーザー名"
@@ -93,7 +93,7 @@ export default function CreateCommentForm({ postId, setCommentData }: Props) {
           <textarea
             rows={4}
             cols={50}
-            className="bg-gray-100 p-1 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="bg-gray-100 p-1 appearance-none border rounded w-full text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-600"
             id="commentMessage"
             onChange={(e) => handleChangeCommentMessage(e)}
             value={commentMessage}
@@ -103,7 +103,7 @@ export default function CreateCommentForm({ postId, setCommentData }: Props) {
 
         <div className="flex items-center justify-between">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-700"
             type="button"
             onClick={handleSubmitCommentData}
           >
