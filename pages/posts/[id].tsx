@@ -40,7 +40,7 @@ const post = ({ postData }: Props) => (
         </div>
         <CommentBase postId={postData.id} />
       </div>
-      <div className="md:block flex-auto max-w-sm bg-blue-300 ml-4 mt-4 rounded-md shadow-md sticky top-11 h-full ">
+      <div className="hidden md:block flex-auto max-w-sm bg-blue-300 ml-4 mt-4 rounded-md shadow-md sticky top-11 h-full ">
         <ElementIdLinks ids={extractionIds(postData.contentHtml)} />
       </div>
     </div>
