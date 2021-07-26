@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase/clientApp";
 import { CommentData } from "../../interfaces";
-import { fetchCommentData } from "../../lib/comment";
 import CommentList from "./CommentList";
 import CreateCommentForm from "./CreateCommentForm";
-import { formatToTimeZone } from "date-fns-timezone";
 
 type Props = {
   postId: string;
@@ -13,47 +11,48 @@ type Props = {
 export default function CommentBase({ postId }: Props) {
   const [commentData, setCommentData] = useState<CommentData[]>(undefined);
 
-  const postCommentData = (
+  const postComment = async (
     userName: string,
     commentMessage: string,
     postId: string
   ) => {
-    const dbRef = db.collection("comments");
-    const id = dbRef.doc().id;
-    const date = new Date();
-    const jpDate = formatToTimeZone(date, "YYYY-MM-DD HH:mm:ss", {
-      timeZone: "Asia/Tokyo",
-    });
-
-    const sendCommentData: CommentData = {
-      id: id,
+    const body = {
       postId: postId,
-      message: commentMessage,
-      createdAt: jpDate,
       userName: userName,
+      commentMessage: commentMessage,
     };
 
-    dbRef.add(sendCommentData).catch((error) => {
-      console.log("error :>> ", error);
-      return false;
+    const res = await fetch("/api/comment/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     });
 
-    const newCommentMessage = Array.from(commentData);
-    newCommentMessage.unshift(sendCommentData);
+    const resMessage = await res.json();
+    //CommentListコンポーネントの再描画
 
-    setCommentData(newCommentMessage);
+    const newCommentData = Array.from(commentData);
+    newCommentData.unshift(resMessage);
+    setCommentData(newCommentData);
   };
 
   useEffect(() => {
-    (async () => {
-      const resCommentData: CommentData[] = await fetchCommentData(postId);
-      setCommentData(resCommentData);
-    })();
+    //コメントデータのフェッチとセット
+    fetch(`/api/comment/?id=${postId}`)
+      .then((res) => res.json())
+      .then((result) => {
+        setCommentData(result);
+      })
+      .catch((error) => {
+        console.log("error :>> ", error);
+      });
   }, []);
 
   return (
     <>
-      <CreateCommentForm postId={postId} postCommentData={postCommentData} />
+      <CreateCommentForm postId={postId} postComment={postComment} />
       {commentData != undefined && <CommentList commentData={commentData} />}
     </>
   );

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 type Props = {
   postId: string;
-  postCommentData: (
+  postComment: (
     userName: string,
     commentMessage: string,
     postId: string
   ) => void;
 };
-export default function CreateCommentForm({ postId, postCommentData }: Props) {
+export default function CreateCommentForm({ postId, postComment }: Props) {
   const [userName, setUserName] = useState("");
   const [commentMessage, setCommentMessage] = useState("");
 
@@ -28,7 +28,8 @@ export default function CreateCommentForm({ postId, postCommentData }: Props) {
     if (commentMessage == "") {
       return false;
     }
-    postCommentData(userName, commentMessage, postId);
+
+    postComment(userName, commentMessage, postId);
     setUserName("");
     setCommentMessage("");
   };
