@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../../firebase/clientApp";
 import { CommentData } from "../../interfaces";
 import CommentList from "./CommentList";
 import CreateCommentForm from "./CreateCommentForm";
+import useSWR from "swr";
 
 type Props = {
   postId: string;
@@ -11,49 +11,23 @@ type Props = {
 export default function CommentBase({ postId }: Props) {
   const [commentData, setCommentData] = useState<CommentData[]>(undefined);
 
-  const postComment = async (
-    userName: string,
-    commentMessage: string,
-    postId: string
-  ) => {
-    const body = {
-      postId: postId,
-      userName: userName,
-      commentMessage: commentMessage,
-    };
-
-    const res = await fetch("/api/comment/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-
-    const resMessage = await res.json();
-    //CommentListコンポーネントの再描画
-
-    const newCommentData = Array.from(commentData);
-    newCommentData.unshift(resMessage);
-    setCommentData(newCommentData);
+  const fetcher = async (url: string): Promise<CommentData[] | null> => {
+    const res = await fetch(url);
+    return res.json();
   };
+  const { data, error } = useSWR(`/api/comment/?id=${postId}`, fetcher);
 
   useEffect(() => {
-    //コメントデータのフェッチとセット
-    fetch(`/api/comment/?id=${postId}`)
-      .then((res) => res.json())
-      .then((result) => {
-        setCommentData(result);
-      })
-      .catch((error) => {
-        console.log("error :>> ", error);
-      });
-  }, []);
+    if (data) {
+      setCommentData(data);
+    }
+  }, [data]);
 
   return (
     <>
-      <CreateCommentForm postId={postId} postComment={postComment} />
-      {commentData != undefined && <CommentList commentData={commentData} />}
+      <CreateCommentForm postId={postId} setCommentData={setCommentData} />
+      <CommentList commentData={commentData} />
+      {error && <div>{error}</div>}
     </>
   );
 }

@@ -20,7 +20,8 @@
     "react-markdown": "^6.0.2",
     "react-query": "^3.18.1",
     "sass": "^1.35.2",
-    "stylelint-config-recommended": "^5.0.0"
+    "stylelint-config-recommended": "^5.0.0",
+    "swr": "^0.5.6"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",

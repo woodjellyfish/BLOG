@@ -2,13 +2,6 @@ import { dbAdmin } from "../../firebase/nodeApp";
 import { formatToTimeZone } from "date-fns-timezone";
 import { CommentData } from "../../interfaces";
 import { NextApiRequest, NextApiResponse } from "next";
-import { RSA_NO_PADDING } from "constants";
-
-type CommentBody = {
-  userName: string;
-  commentMessage: string;
-  postId: string;
-};
 
 export default async function handler(
   req: NextApiRequest,
