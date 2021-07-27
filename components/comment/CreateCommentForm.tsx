@@ -1,8 +1,7 @@
-import { error } from "console";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { CommentData } from "../../interfaces";
-import VerificationModal from "./VerificationModal";
+import ConfModal from "./ConfModal";
 
 type Props = {
   postId: string;
@@ -90,7 +89,7 @@ export default function CreateCommentForm({ postId, setCommentData }: Props) {
       <div className="w-full">
         {isModalOpen && (
           <div className="w-full flex justify-center absolute z-10">
-            <VerificationModal
+            <ConfModal
               userName={userName}
               commentMessage={commentMessage}
               setIsModalOpen={setIsModalOpen}
