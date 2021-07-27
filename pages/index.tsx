@@ -30,7 +30,7 @@ const IndexPage = ({ allPostsData }: PostsData) => {
           ))}
         </div>
 
-        <div className={sideStyle}>
+        <div className="hidden md:block flex-auto max-w-sm bg-blue-300 ml-4 mt-4 rounded-md shadow-md  top-11 h-full sticky">
           <RecentPosts postsData={allPostsData} />
         </div>
       </div>
