@@ -17,17 +17,17 @@ export default function VerificationModal({
     setIsVerification(true);
     setIsModalOpen(false);
   };
-  const handleCancelClick = (e) => {
+  const handleCancelClick = () => {
     setIsVerification(false);
     setIsModalOpen(false);
   };
   return (
     <div
       className="fixed top-0 left-0 h-full w-full bg-gray-500 bg-opacity-40 flex items-center justify-center"
-      onClick={() => handleCancelClick}
+      onClick={handleCancelClick}
     >
       <div
-        className="relative w-[80%] md:w-1/3 bg-white rounded-lg py-8 shadow-lg flex flex-col items-center justify-center"
+        className="w-[80%] md:w-1/3 bg-white rounded-lg py-8 shadow-lg flex flex-col items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
         <div>ユーザー名</div>

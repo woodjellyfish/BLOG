@@ -1,9 +1,6 @@
 import { useState } from "react";
+import VerificationModal from "../components/comment/VerificationModal";
 
 export default function Test() {
-  return (
-    <div>
-      <input className="shadow border rounded py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-200" />
-    </div>
-  );
+  return <div></div>;
 }
