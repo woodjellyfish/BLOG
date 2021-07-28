@@ -1,0 +1,19 @@
+.btnClass {
+  @apply mb-3 mx-1 rounded-full items-center shadow-lg px-4 py-2 text-gray-100 font-bold text-xl select-none;
+}
+
+.btnPrimary {
+  @extend .btnClass;
+  @apply bg-blue-500;
+  &:hover {
+    @apply bg-blue-400;
+  }
+}
+
+.btnStop {
+  @extend .btnClass;
+  @apply bg-red-500;
+  &:hover {
+    @apply bg-red-400;
+  }
+}
