@@ -8,7 +8,11 @@ import {
 
 export const CodeBlock: CodeComponent = ({ inline, className, children }) => {
   if (inline) {
-    return <code className={className}>{children}</code>;
+    return (
+      <a className="bg-blue-400">
+        <code className={className}>{children}</code>
+      </a>
+    );
   }
   const match = /language-(\w+)/.exec(className || "");
   const lang = match && match[1] ? match[1] : "";
