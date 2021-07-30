@@ -9,24 +9,16 @@ type Props = {
 };
 
 export default function CommentBase({ postId }: Props) {
-  const [commentData, setCommentData] = useState<CommentData[]>(undefined);
-
   const fetcher = async (url: string): Promise<CommentData[] | null> => {
     const res = await fetch(url);
-    return res.json();
+    return await res.json();
   };
   const { data, error } = useSWR(`/api/comment/?id=${postId}`, fetcher);
 
-  useEffect(() => {
-    if (data) {
-      setCommentData(data);
-    }
-  }, [data]);
-
   return (
     <>
-      <CreateCommentForm postId={postId} setCommentData={setCommentData} />
-      <CommentList commentData={commentData} />
+      <CreateCommentForm postId={postId} />
+      {data ? <CommentList commentData={data} /> : "loading..."}
       {error && <div>{error}</div>}
     </>
   );

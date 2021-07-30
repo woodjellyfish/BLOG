@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { CommentData } from "../../interfaces";
 import ConfModal from "./ConfModal";
+import { mutate } from "swr";
 
 type Props = {
   postId: string;
-  setCommentData: (value: React.SetStateAction<CommentData[]>) => void;
 };
-export default function CreateCommentForm({ postId, setCommentData }: Props) {
+export default function CreateCommentForm({ postId }: Props) {
   const [userName, setUserName] = useState("");
   const [commentMessage, setCommentMessage] = useState("");
   const [userNameErrorMessage, setUserNameErrorMessage] = useState("");
@@ -35,14 +35,9 @@ export default function CreateCommentForm({ postId, setCommentData }: Props) {
       body: JSON.stringify(body),
     });
 
-    const resMessage = await res.json();
-    //CommentListコンポーネントの再描画
+    // const resMessage = await res.json();
 
-    setCommentData((pre) => {
-      const newCommentData = Array.from(pre);
-      newCommentData.unshift(resMessage);
-      return newCommentData;
-    });
+    mutate(`/api/comment/?id=${postId}`);
   };
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
