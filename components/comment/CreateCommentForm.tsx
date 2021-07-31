@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
-import { CommentData } from "../../interfaces";
 import ConfModal from "./ConfModal";
 import { mutate } from "swr";
 
@@ -14,7 +12,6 @@ export default function CreateCommentForm({ postId }: Props) {
   const [commentErrorMessage, setCommentErrorMessage] = useState("");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isConfirm, setIsConfirm] = useState(false);
 
   const postComment = async (
     userName: string,
@@ -50,7 +47,6 @@ export default function CreateCommentForm({ postId }: Props) {
   const handleSubmitCommentData = () => {
     setUserNameErrorMessage("");
     setCommentErrorMessage("");
-    setIsConfirm(false);
 
     if (userName == "") {
       setUserNameErrorMessage("ユーザ名が入力されていません。");
@@ -62,28 +58,20 @@ export default function CreateCommentForm({ postId }: Props) {
     if (userName && commentMessage) {
       //確認ダイアログ
       setIsModalOpen(true);
-      //コメントのポストはuseEffect[isModalOpen]で実行
 
       //todo コメント後に管理者への通知
     }
   };
 
-  useEffect(() => {
-    if (isConfirm) {
-      postComment(userName, commentMessage, postId);
-      setIsConfirm(false);
-      setUserName("");
-      setCommentMessage("");
-    }
-  }, [isModalOpen]);
-
   //モーダル用イベントハンドラ
-  const handleOKonClick = () => {
-    setIsConfirm(true);
+  const handleOKClick = () => {
+    postComment(userName, commentMessage, postId);
+    setUserName("");
+    setCommentMessage("");
+
     setIsModalOpen(false);
   };
   const handleCancelClick = () => {
-    setIsConfirm(false);
     setIsModalOpen(false);
   };
 
@@ -91,6 +79,9 @@ export default function CreateCommentForm({ postId }: Props) {
   const ModalBody = () => {
     return (
       <>
+        <div className="text-center font-bold">
+          以下の内容で投稿します、よろしいですか？
+        </div>
         <div className="">ユーザー名</div>
         <div className="px-3 py-1 border-4 border-gray-300 rounded-lg">
           {userName}
@@ -98,20 +89,6 @@ export default function CreateCommentForm({ postId }: Props) {
         <div>コメント内容</div>
         <div className="px-3 py-1 border-4 border-gray-300 rounded-lg">
           {commentMessage}
-        </div>
-        <div>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6 mx-8"
-            onClick={handleOKonClick}
-          >
-            OK
-          </button>
-          <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-6"
-            onClick={handleCancelClick}
-          >
-            CANCEL
-          </button>
         </div>
       </>
     );
@@ -121,7 +98,10 @@ export default function CreateCommentForm({ postId }: Props) {
     <>
       <div className="w-full">
         {isModalOpen && (
-          <ConfModal handleCancelClick={handleCancelClick}>
+          <ConfModal
+            CancelProcess={handleCancelClick}
+            OKProcess={handleOKClick}
+          >
             <ModalBody />
           </ConfModal>
         )}
@@ -133,7 +113,7 @@ export default function CreateCommentForm({ postId }: Props) {
             ユーザー名
           </label>
           <input
-            className="bg-gray-100 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-600"
+            className="bg-gray-100 appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-600"
             id="userName"
             type="text"
             placeholder="ユーザー名"
