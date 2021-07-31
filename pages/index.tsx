@@ -10,10 +10,6 @@ type PostsData = {
 };
 
 const IndexPage = ({ allPostsData }: PostsData) => {
-  const [sideStyle, setSideStyle] = useState(
-    "flex-auto max-w-sm bg-blue-300 ml-4 mt-4 rounded-md shadow-md  top-11 h-full "
-  );
-
   return (
     <Layout title="Home | Next.js + TypeScript Example">
       <div className=" md:flex justify-center">
