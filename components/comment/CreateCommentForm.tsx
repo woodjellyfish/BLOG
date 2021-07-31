@@ -14,7 +14,7 @@ export default function CreateCommentForm({ postId }: Props) {
   const [commentErrorMessage, setCommentErrorMessage] = useState("");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isVerification, setIsVerification] = useState(false);
+  const [isConfirm, setIsConfirm] = useState(false);
 
   const postComment = async (
     userName: string,
@@ -35,8 +35,6 @@ export default function CreateCommentForm({ postId }: Props) {
       body: JSON.stringify(body),
     });
 
-    // const resMessage = await res.json();
-
     mutate(`/api/comment/?id=${postId}`);
   };
 
@@ -52,7 +50,7 @@ export default function CreateCommentForm({ postId }: Props) {
   const handleSubmitCommentData = () => {
     setUserNameErrorMessage("");
     setCommentErrorMessage("");
-    setIsVerification(false);
+    setIsConfirm(false);
 
     if (userName == "") {
       setUserNameErrorMessage("ユーザ名が入力されていません。");
@@ -71,24 +69,25 @@ export default function CreateCommentForm({ postId }: Props) {
   };
 
   useEffect(() => {
-    if (isVerification) {
+    if (isConfirm) {
       postComment(userName, commentMessage, postId);
-      setIsVerification(false);
+      setIsConfirm(false);
       setUserName("");
       setCommentMessage("");
     }
   }, [isModalOpen]);
 
-  //モーダル用イベントハンドラとモーダルのボディコンポーネント
+  //モーダル用イベントハンドラ
   const handleOKonClick = () => {
-    setIsVerification(true);
+    setIsConfirm(true);
     setIsModalOpen(false);
   };
   const handleCancelClick = () => {
-    setIsVerification(false);
+    setIsConfirm(false);
     setIsModalOpen(false);
   };
 
+  //モーダルのボディコンポーネント
   const ModalBody = () => {
     return (
       <>
@@ -108,7 +107,7 @@ export default function CreateCommentForm({ postId }: Props) {
             OK
           </button>
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-6"
             onClick={handleCancelClick}
           >
             CANCEL

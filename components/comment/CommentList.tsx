@@ -1,17 +1,26 @@
 import React from "react";
+import useSWR from "swr";
 import { CommentData } from "../../interfaces";
 
 type Props = {
-  commentData: CommentData[];
+  postId: string;
 };
 
-export default function CommentList({ commentData }: Props) {
+export default function CommentList({ postId }: Props) {
+  const fetcher = async (url: string): Promise<CommentData[] | null> => {
+    const res = await fetch(url);
+    return await res.json();
+  };
+  const { data, error } = useSWR(`/api/comment/?id=${postId}`, fetcher);
+
   const List = () => {
-    if (commentData.length == 0)
+    if (error) return <div>読み込みに失敗しました。</div>;
+    if (!data) return <div>読込中</div>;
+    if (data.length == 0)
       return <div className="px-2">コメントはありません</div>;
     return (
       <div className="px-2">
-        {commentData.map((comment, i) => (
+        {data.map((comment, i) => (
           <div className="mb-3 ml-2" key={i}>
             <p>{comment.userName}</p>
             <p>{comment.message}</p>
@@ -26,7 +35,7 @@ export default function CommentList({ commentData }: Props) {
     <>
       <div className="bg-blue-300 rounded-md shadow-md">
         <h3 className="font-bold px-2">コメント一覧</h3>
-        {commentData && <List />}
+        <List />
       </div>
     </>
   );
