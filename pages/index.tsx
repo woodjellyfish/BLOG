@@ -1,9 +1,8 @@
 import Layout from "../components/Layout";
-import PostCard from "../components/post";
 import { getAllPostIds, getPostFullData } from "../lib/post";
 import RecentPosts from "../components/side/RecentPosts";
 import { PostData } from "../interfaces";
-import { useState } from "react";
+import { PostCard } from "../components/post/index";
 
 type PostsData = {
   allPostsData: PostData[];

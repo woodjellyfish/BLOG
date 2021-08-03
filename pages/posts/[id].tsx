@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllPostIds, getPostFullData } from "../../lib/post";
-import PostCard from "../../components/post";
+import { PostPage } from "../../components/post";
 import { CommentData, PostData } from "../../interfaces";
 import ElementIdLinks from "../../components/side/ElementIdLinks";
 import CommentBase from "../../components/comment/CommentBase";
@@ -30,7 +30,7 @@ const post = ({ postData }: Props) => (
     <div className=" md:flex justify-center">
       <div className="flex flex-col">
         <div className="flex-initial flex-col ">
-          <PostCard
+          <PostPage
             title={postData.title}
             id={postData.id}
             createdAt={postData.createdAt}

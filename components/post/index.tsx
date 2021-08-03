@@ -1,3 +1,4 @@
+import PostPage from "./PostPage";
 import PostCard from "./PostCard";
 
-export default PostCard;
+export { PostPage, PostCard };
