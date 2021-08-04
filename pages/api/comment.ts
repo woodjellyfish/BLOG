@@ -1,13 +1,14 @@
-import { dbAdmin } from "../../firebase/nodeApp";
+import { db } from "../../firebase/nodeApp";
 import { formatToTimeZone } from "date-fns-timezone";
 import { CommentData } from "../../interfaces";
 import { NextApiRequest, NextApiResponse } from "next";
+
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const dbRef = dbAdmin.collection("comments");
+  const dbRef = db.collection("comments");
 
   switch (req.method) {
     case "GET": {
@@ -49,10 +50,23 @@ export default async function handler(
         userName: userName,
       };
 
+
+
+      
+
       try {
         const commentRef = await dbRef.add(sendCommentData);
         const resBody = await commentRef.get();
         res.status(200).json(resBody.data());
+        const adminMailData = {
+          to: "woodjellyfish1@gmail.com",
+          message: {
+            subject: "mail test",
+            text: "test",
+          },
+        };
+
+        // db.collection("mail").add(adminMailData);
       } catch (error) {
         res.status(500).json(error);
       }

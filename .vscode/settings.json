@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["fullpath", "instansof"]
+  "cSpell.words": ["fullpath", "instansof"],
+  "eslint.workingDirectories": ["./", "./functions"]
 }

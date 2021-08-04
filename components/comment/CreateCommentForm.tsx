@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ConfModal from "./ConfModal";
 import { mutate } from "swr";
+import { functions } from "../../firebase/clientApp";
 
 type Props = {
   postId: string;
@@ -68,6 +69,8 @@ export default function CreateCommentForm({ postId }: Props) {
     postComment(userName, commentMessage, postId);
     setUserName("");
     setCommentMessage("");
+
+    const sendMail = functions.httpsCallable("sendMail");
 
     setIsModalOpen(false);
   };

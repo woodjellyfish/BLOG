@@ -13,4 +13,6 @@ if (!admin.apps.length) {
   });
 }
 
-export const dbAdmin = admin.firestore();
+const db = admin.firestore();
+
+export { db };
