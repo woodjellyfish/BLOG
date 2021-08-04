@@ -33,7 +33,7 @@ export default function CreateCommentForm({ postId }: Props) {
       body: JSON.stringify(body),
     });
 
-    mutate(`/api/comment/?id=${postId}`);
+    return res.status;
   };
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,12 +65,29 @@ export default function CreateCommentForm({ postId }: Props) {
   };
 
   //モーダル用イベントハンドラ
-  const handleOKClick = () => {
-    postComment(userName, commentMessage, postId);
-    setUserName("");
-    setCommentMessage("");
+  const handleOKClick = async () => {
+    const stats = await postComment(userName, commentMessage, postId);
+    if (stats === 200) {
+      setUserName("");
+      setCommentMessage("");
 
-    const sendMail = functions.httpsCallable("sendMail");
+      const body = {
+        postId: postId,
+        userName: userName,
+        commentMessage: commentMessage,
+      };
+
+      fetch("/api/sendmail/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      mutate(`/api/comment/?id=${postId}`);
+    } else {
+      console.log("コメントの投稿に失敗しました。");
+    }
 
     setIsModalOpen(false);
   };

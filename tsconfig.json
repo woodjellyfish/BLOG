@@ -20,7 +20,7 @@
     "**/*.tsx",
     "context/AuthContext.js",
     "components/reactMarkdown/index.js",
-    "pages/api/sendMail.ts"
+    "pages/api/sendmail.ts"
   ],
   "exclude": ["node_modules"]
 }
