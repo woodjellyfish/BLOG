@@ -59,8 +59,6 @@ export default function CreateCommentForm({ postId }: Props) {
     if (userName && commentMessage) {
       //確認ダイアログ
       setIsModalOpen(true);
-
-      //todo コメント後に管理者への通知
     }
   };
 
@@ -127,7 +125,7 @@ export default function CreateCommentForm({ postId }: Props) {
         )}
       </div>
 
-      <div className="bg-blue-300 p-2 rounded-md shadow-md">
+      <div className="bg-white p-2 rounded-md shadow-md">
         <div className="mb-4">
           <label className="block text-gray-600 text-sm font-semibold mb-2">
             ユーザー名
@@ -141,7 +139,7 @@ export default function CreateCommentForm({ postId }: Props) {
             onChange={(e) => handleChangeName(e)}
             onFocus={() => setUserNameErrorMessage("")}
           />
-          <a className="ml-1.5 text-red-600">{userNameErrorMessage}</a>
+          <a className="ml-1.5 text-red-500">{userNameErrorMessage}</a>
         </div>
         <div className="mb-4">
           <label className="block text-gray-600 text-sm font-semibold mb-2">
@@ -156,12 +154,12 @@ export default function CreateCommentForm({ postId }: Props) {
             value={commentMessage}
             onFocus={() => setCommentErrorMessage("")}
           />
-          <a className="ml-1.5 text-red-600">{commentErrorMessage}</a>
+          <a className="ml-1.5 text-red-500">{commentErrorMessage}</a>
         </div>
 
         <div className="flex items-center justify-between">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-700"
+            className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-700"
             type="button"
             onClick={handleSubmitCommentData}
           >

@@ -1,14 +1,13 @@
 import * as sendgrid from "@sendgrid/mail";
 import { NextApiRequest, NextApiResponse } from "next";
-import { cache } from "swr";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const apiKey = process.env.SENDGRID_SERVICE_KEY;
   const fromEmail = "woodjellyfish1@gmail.com";
 
-  const { postId, commentMessage, userName } = req.body;
-
   sendgrid.setApiKey(apiKey);
+
+  const { postId, commentMessage, userName } = req.body;
   const message = {
     to: "woodjellyfish1@gmail.com",
     from: `自動メール<${fromEmail}>`,

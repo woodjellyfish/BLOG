@@ -12,13 +12,13 @@ const classes = {
 };
 
 const Layout = ({ children, title = "This is the default title" }: Props) => (
-  <div className="bg-blue-200">
+  <div className="bg-gray-100">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <header className="sticky bg-blue-500 top-0 shadow-lg" id="header">
+    <header className="sticky bg-blue-200 top-0 shadow-lg" id="header">
       <nav className="bg-">
         <Link href="/">
           <a className={classes.link}>Home</a>
@@ -37,7 +37,7 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
         </Link>
       </nav>
     </header>
-    {children}
+    <div className="block md:flex md:flex-col md:items-center">{children}</div>
     <footer></footer>
   </div>
 );

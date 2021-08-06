@@ -9,7 +9,7 @@ import {
 export const CodeBlock: CodeComponent = ({ inline, className, children }) => {
   if (inline) {
     return (
-      <a className="bg-blue-400">
+      <a className="bg-blue-100">
         <code className={className}>{children}</code>
       </a>
     );
@@ -31,7 +31,7 @@ export const H2: HeadingComponent = ({ level, node, className, ...props }) => {
   return (
     <h2
       id={props.children[0].toString()}
-      className="text-2xl font-bold px-2 m-4 border-b-4 border-l-[16px] border-blue-500 "
+      className="text-2xl font-bold px-2 m-4 border-b-4 border-l-[16px] border-blue-200 "
     >
       {props.children}
     </h2>

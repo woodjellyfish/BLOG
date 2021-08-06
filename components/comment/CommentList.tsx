@@ -33,7 +33,7 @@ export default function CommentList({ postId }: Props) {
 
   return (
     <>
-      <div className="bg-blue-300 rounded-md shadow-md">
+      <div className="bg-white rounded-md shadow-md">
         <h3 className="font-bold px-2">コメント一覧</h3>
         <List />
       </div>

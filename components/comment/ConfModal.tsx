@@ -25,13 +25,13 @@ const ConfModal: React.FC<Props> = ({ children, CancelProcess, OKProcess }) => {
 
           <div>
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6 mx-8"
+              className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded mt-6 mx-8"
               onClick={() => handleButtonClick("OK")}
             >
               OK
             </button>
             <button
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-6"
+              className="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded mt-6"
               onClick={() => handleButtonClick("CANCEL")}
             >
               CANCEL

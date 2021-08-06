@@ -14,12 +14,12 @@ export default function PostPage({
 }: PostData) {
   return (
     <>
-      <div className="m-5 p-3 max-w-3xl mx-auto bg-blue-300 rounded-xl shadow-md ">
-        <div className="px-2 bg-blue-400 rounded-md shadow-lg">
+      <div className="m-5 p-3 max-w-3xl w-auto  bg-white rounded-xl shadow-md ">
+        <div className="px-2 bg-gray-200 rounded-md shadow-lg">
           <Link href={`/posts/${id}`}>
             <a
               id={id}
-              className="px-0 mb-4 font-bold text-3xl hover:bg-yellow-200"
+              className="px-0 mb-4 font-bold text-3xl text-blue-500 hover:underline"
             >
               {title}
             </a>
