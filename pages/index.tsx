@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 import { getAllPostIds, getPostFullData } from "../lib/post";
 import RecentPosts from "../components/side/RecentPosts";
 import { PostData } from "../interfaces";
-import { PostCard } from "../components/post/index";
+import { PostCard, PostPage } from "../components/post/index";
 import { SideMenu } from "../components/side";
 
 type PostsData = {
@@ -12,10 +12,10 @@ type PostsData = {
 const IndexPage = ({ allPostsData }: PostsData) => {
   return (
     <Layout title="Home | Next.js + TypeScript Example">
-      <div className="block md:flex md:justify-center">
-        <div className="flex flex-col ">
+      <div className="block md:flex">
+        <div className="flex flex-col m-3 flex-shrink">
           {allPostsData.map((post) => (
-            <PostCard
+            <PostPage
               key={post.id}
               id={post.id}
               title={post.title}

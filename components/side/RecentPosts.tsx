@@ -12,14 +12,12 @@ export default function RecentPosts({ postsData }: Props) {
       </a>
       <ul>
         {postsData.map((postData) => (
-          <>
-            <div key={postData.id} className="mx-3 mt-2">
-              <li className="text-lg box-border h-auto text-blue-400 hover:underline">
-                <Link href={`/posts/${postData.id}`}>{postData.title}</Link>
-              </li>
-              <div className="ml-5">{postData.createdAt}</div>
-            </div>
-          </>
+          <div key={postData.id} className="mx-3 mt-2">
+            <li className="text-lg box-border h-auto text-blue-400 hover:underline">
+              <Link href={`/posts/${postData.id}`}>{postData.title}</Link>
+            </li>
+            <div className="ml-5">{postData.createdAt}</div>
+          </div>
         ))}
       </ul>
     </div>

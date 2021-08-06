@@ -9,7 +9,7 @@ export default function PostCard({
   id,
 }: PostData) {
   return (
-    <div className="rounded-xl">
+    <div className="rounded-xl flex">
       <PostPage
         id={id}
         title={title}

@@ -37,7 +37,9 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
         </Link>
       </nav>
     </header>
-    <div className="block md:flex md:flex-col md:items-center">{children}</div>
+    <div className="block md:flex md:flex-col md:justify-start lg:items-center">
+      {children}
+    </div>
     <footer></footer>
   </div>
 );

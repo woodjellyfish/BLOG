@@ -28,9 +28,9 @@ const extractionIds = (md: string) => {
 
 const post = ({ postData }: Props) => (
   <Layout>
-    <div className=" md:flex justify-center">
-      <div className="flex flex-col">
-        <div className="flex-initial flex-col ">
+    <div className="md:flex justify-start flex-grow ">
+      <div className="flex flex-col flex-grow m-3">
+        <div className="flex-initial flex-col flex-grow ">
           <PostPage
             title={postData.title}
             id={postData.id}
