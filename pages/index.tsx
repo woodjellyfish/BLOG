@@ -13,7 +13,7 @@ const IndexPage = ({ allPostsData }: PostsData) => {
   return (
     <Layout title="Home | Next.js + TypeScript Example">
       <div className="block md:flex">
-        <div className="flex flex-col m-3 flex-shrink">
+        <div className="flex flex-col m-3">
           {allPostsData.map((post) => (
             <PostPage
               key={post.id}

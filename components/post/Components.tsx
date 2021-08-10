@@ -9,9 +9,9 @@ import {
 export const CodeBlock: CodeComponent = ({ inline, className, children }) => {
   if (inline) {
     return (
-      <a className="bg-blue-100">
-        <code className={className}>{children}</code>
-      </a>
+      <code className="break-words">
+        <span className="bg-gray-200 overflow-auto">{children}</span>
+      </code>
     );
   }
   const match = /language-(\w+)/.exec(className || "");

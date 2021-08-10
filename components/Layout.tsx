@@ -19,7 +19,7 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <header className="sticky bg-blue-200 top-0 shadow-lg" id="header">
-      <nav className="bg-">
+      <nav className="">
         <Link href="/">
           <a className={classes.link}>Home</a>
         </Link>
