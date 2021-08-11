@@ -12,8 +12,8 @@ type PostsData = {
 const IndexPage = ({ allPostsData }: PostsData) => {
   return (
     <Layout title="Home | Next.js + TypeScript Example">
-      <div className="block md:flex">
-        <div className="flex flex-col m-3">
+      <div className="block md:flex md:justify-between">
+        <div className="my-3 ml-6 w-[calc(100%-370px)]">
           {allPostsData.map((post) => (
             <PostPage
               key={post.id}

@@ -28,17 +28,15 @@ const extractionIds = (md: string) => {
 
 const post = ({ postData }: Props) => (
   <Layout>
-    <div className="md:flex justify-start flex-grow ">
-      <div className="flex flex-col flex-grow m-3">
-        <div className="flex-initial flex-col flex-grow ">
-          <PostPage
-            title={postData.title}
-            id={postData.id}
-            createdAt={postData.createdAt}
-            updatedAt={postData.updatedAt}
-            contentHtml={postData.contentHtml}
-          />
-        </div>
+    <div className="block md:flex md:justify-between">
+      <div className="my-3 ml-6 w-[calc(100%-370px)]">
+        <PostPage
+          title={postData.title}
+          id={postData.id}
+          createdAt={postData.createdAt}
+          updatedAt={postData.updatedAt}
+          contentHtml={postData.contentHtml}
+        />
         <CommentBase postId={postData.id} />
       </div>
 

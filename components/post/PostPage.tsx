@@ -14,7 +14,7 @@ export default function PostPage({
 }: PostData) {
   return (
     <>
-      <div className="p-3 mb-3 max-w-3xl bg-white rounded-xl shadow-md ">
+      <div className="p-3 mb-3 bg-white rounded-xl shadow-md ">
         <div className="px-2 bg-gray-200 rounded-md shadow-lg">
           <Link href={`/posts/${id}`}>
             <a
@@ -32,7 +32,7 @@ export default function PostPage({
           </a>
         </div>
 
-        <div className="text-base">
+        <div className="text-base ">
           <ReactMarkdown components={{ code: CodeBlock, h2: H2, h3: H3, p: P }}>
             {contentHtml}
           </ReactMarkdown>
