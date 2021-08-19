@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ConfModal from "./ConfModal";
 import { mutate } from "swr";
-import { functions } from "../../firebase/clientApp";
 
 type Props = {
   postId: string;
@@ -65,27 +64,32 @@ export default function CreateCommentForm({ postId }: Props) {
   //モーダル用イベントハンドラ
   const handleOKClick = async () => {
     const stats = await postComment(userName, commentMessage, postId);
-    if (stats === 200) {
-      setUserName("");
-      setCommentMessage("");
 
-      const body = {
-        postId: postId,
-        userName: userName,
-        commentMessage: commentMessage,
-      };
-
-      fetch("/api/sendmail/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-      mutate(`/api/comment/?id=${postId}`);
-    } else {
+    if (stats !== 200) {
       console.log("コメントの投稿に失敗しました。");
+      return false;
     }
+
+    //コメント投稿後の管理者へのメール送信
+    setUserName("");
+    setCommentMessage("");
+
+    const body = {
+      postId: postId,
+      userName: userName,
+      commentMessage: commentMessage,
+    };
+
+    fetch("/api/sendmail/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    //CommentListで取得したdata=useSWR()を再フェッチ&再レンダリングする
+    mutate(`/api/comment/?id=${postId}`);
 
     setIsModalOpen(false);
   };
